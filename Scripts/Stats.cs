@@ -1,6 +1,10 @@
 using Godot;
 using System;
-
+///<summary>
+/// PLANNED FOR DEPRICATION
+/// Stats holds the stats of both player and enemy
+/// Mostly uused for testing purposes
+///</summary>
 public partial class Stats : Node
 {
     public int pHealth = 100;

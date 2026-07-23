@@ -3,10 +3,13 @@ using System;
 using System.Collections.Generic;
 using static Battle;
 
+///<summary>
+/// Handles the interactions with the UI done by user.
+///</summary>
 public partial class InteractionHandler : Node
 {
     Stats stats = new Stats();
-    UIHandler ui = new UIHandler();
+    UIHandler ui = new UIHandler(); // ui is used to update hud elements.
 
 
     // Called when the node enters the scene tree for the first time.
@@ -20,17 +23,19 @@ public partial class InteractionHandler : Node
     public override void _Process(double delta)
     {
     }
-
+    ///<summary>
+    /// This function is called whenever an item in ItemList is clicked.
+    ///</summary>
     private void OnItemClicked(int index, Vector2 at_position, int mouse_button)
     {
         GD.Print(("bwuh???"));
-        if(index == 0)
+        if(index == 0)	// End Turn
         {
             ui.AddLogEntry("Turn ended!");
             stats.battle.endTurn();
             ui.Update();
         }
-        if (index == 1)
+        if (index == 1)	// Attack
         {
             stats.turn++;
             if (stats.battle.currentTurn)

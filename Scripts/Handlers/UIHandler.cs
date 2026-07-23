@@ -7,7 +7,6 @@ public partial class UIHandler : Node
     private Log _log = new();
 
     Stats stats = new Stats();
-    // private InteractionHandle iHandle = new();
 	
     private RichTextLabel enemyHealth;
     private RichTextLabel playerHealth;
@@ -20,7 +19,6 @@ public partial class UIHandler : Node
         playerHealth = GetNode<RichTextLabel>("HealthPlayer");
         logDisplay = GetNode<RichTextLabel>("LogDisplay");
         turnIndicator = GetNode<RichTextLabel>("TurnIndicator");
-        // iHandle = GetNode<InteractionHandle>("InteractionHandler");
         stats = GetNode<Stats>("Stats");
     }
 
