@@ -1,0 +1,7 @@
+[gd_resource type="Theme" format=3 uid="uid://vgw8llfph24j"]
+
+[ext_resource type="StyleBox" uid="uid://cp4h1jsl1y5kl" path="res://Themes/BoxBackground.tres" id="1_75wi8"]
+
+[resource]
+RichTextLabel/constants/outline_size = 7
+RichTextLabel/styles/normal = ExtResource("1_75wi8")

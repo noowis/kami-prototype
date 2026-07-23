@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://p6iirgl0tehy"]
+
+[ext_resource type="Theme" uid="uid://vgw8llfph24j" path="res://Themes/Log.tres" id="1_5udjv"]
+[ext_resource type="Script" uid="uid://0hjy5gso1yxv" path="res://Scripts/Handlers/InteractionHandler.cs" id="1_m06c7"]
+[ext_resource type="Script" uid="uid://bv3fn5xmkplw7" path="res://Scripts/Handlers/UIHandler.cs" id="2_oa4a4"]
+[ext_resource type="Theme" uid="uid://coywof8b7yfp5" path="res://Themes/HPdisplay.tres" id="4_ea04b"]
+[ext_resource type="Script" uid="uid://6jgg2gj5p4fv" path="res://Scripts/Stats.cs" id="5_711bq"]
+
+[node name="Control" type="Control" unique_id=555840305]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InteractionHandler" type="Node" parent="." unique_id=1604723967]
+script = ExtResource("1_m06c7")
+
+[node name="PlayerActions" type="ItemList" parent="InteractionHandler" unique_id=1825934170]
+offset_left = 312.0
+offset_top = 186.0
+offset_right = 679.0
+offset_bottom = 474.0
+item_count = 3
+item_0/text = "End Turn"
+item_1/text = "Attack"
+
+[node name="UIHandler" type="Node" parent="InteractionHandler" unique_id=42149753]
+script = ExtResource("2_oa4a4")
+
+[node name="LogDisplay" type="RichTextLabel" parent="InteractionHandler/UIHandler" unique_id=919297827]
+offset_left = 744.0
+offset_top = 446.0
+offset_right = 1144.0
+offset_bottom = 647.0
+theme = ExtResource("1_5udjv")
+text = "Test"
+
+[node name="HealthPlayer" type="RichTextLabel" parent="InteractionHandler/UIHandler" unique_id=1218354957]
+offset_left = 839.0
+offset_top = 202.0
+offset_right = 960.0
+offset_bottom = 230.0
+theme = ExtResource("4_ea04b")
+text = "100"
+
+[node name="HealthEnemy" type="RichTextLabel" parent="InteractionHandler/UIHandler" unique_id=671925700]
+offset_left = 839.0
+offset_top = 175.0
+offset_right = 960.0
+offset_bottom = 202.0
+theme = ExtResource("4_ea04b")
+text = "100"
+
+[node name="TurnIndicator" type="RichTextLabel" parent="InteractionHandler/UIHandler" unique_id=1916926248]
+offset_left = 398.0
+offset_top = 96.0
+offset_right = 689.0
+offset_bottom = 122.0
+theme = ExtResource("4_ea04b")
+text = "Turn"
+
+[node name="Stats" type="Node" parent="InteractionHandler/UIHandler" unique_id=1200991112]
+script = ExtResource("5_711bq")
+
+[node name="P_HPLabel" type="RichTextLabel" parent="InteractionHandler" unique_id=2115257457]
+offset_left = 718.0
+offset_top = 204.0
+offset_right = 839.0
+offset_bottom = 229.0
+text = "Player Health:"
+
+[node name="E_HPLabel" type="RichTextLabel" parent="InteractionHandler" unique_id=989491737]
+offset_left = 717.0
+offset_top = 175.0
+offset_right = 838.0
+offset_bottom = 201.0
+text = "Enemy Health:"
+
+[connection signal="item_clicked" from="InteractionHandler/PlayerActions" to="InteractionHandler" method="OnItemClicked"]
