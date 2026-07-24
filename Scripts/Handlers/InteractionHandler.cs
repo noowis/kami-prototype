@@ -10,7 +10,7 @@ public partial class InteractionHandler : Node
 {
     Stats stats = new Stats();
     UIHandler ui = new UIHandler(); // ui is used to update hud elements.
-
+    
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -19,10 +19,6 @@ public partial class InteractionHandler : Node
         stats = GetNode<Stats>("UIHandler/Stats");
     }
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(double delta)
-    {
-    }
     ///<summary>
     /// This function is called whenever an item in ItemList is clicked.
     ///</summary>
@@ -38,11 +34,18 @@ public partial class InteractionHandler : Node
         if (index == 1)	// Attack
         {
             stats.turn++;
+            int totalDamage = 0;
             if (stats.battle.currentTurn)
-                stats.pHealth--;
+            {
+                totalDamage = stats.enemy.attack - stats.player.defense;
+                stats.player.currentHealth -= totalDamage;
+            }
             else
-                stats.eHealth--;
-            ui.AddLogEntry((stats.battle.currentTurn ? "Player" : "Enemy") + " took 1 damage on turn " + stats.turn.ToString());
+            {
+                totalDamage = stats.player.attack - stats.enemy.defense;
+                stats.enemy.currentHealth -= totalDamage;
+            }
+            ui.AddLogEntry((stats.battle.currentTurn ? "Player" : "Enemy") + " took " + totalDamage + " damage on turn " + stats.turn.ToString());
             ui.Update();
         }
     }

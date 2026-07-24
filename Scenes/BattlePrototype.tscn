@@ -22,16 +22,18 @@ offset_left = 312.0
 offset_top = 186.0
 offset_right = 679.0
 offset_bottom = 474.0
-item_count = 3
+item_count = 4
 item_0/text = "End Turn"
 item_1/text = "Attack"
+item_2/text = "Tech"
+item_3/text = "Stock"
 
 [node name="UIHandler" type="Node" parent="InteractionHandler" unique_id=42149753]
 script = ExtResource("2_oa4a4")
 
 [node name="LogDisplay" type="RichTextLabel" parent="InteractionHandler/UIHandler" unique_id=919297827]
 offset_left = 744.0
-offset_top = 446.0
+offset_top = 329.0
 offset_right = 1144.0
 offset_bottom = 647.0
 theme = ExtResource("1_5udjv")
@@ -64,6 +66,13 @@ text = "Turn"
 [node name="Stats" type="Node" parent="InteractionHandler/UIHandler" unique_id=1200991112]
 script = ExtResource("5_711bq")
 
+[node name="StatBlock" type="RichTextLabel" parent="InteractionHandler/UIHandler" unique_id=741154204]
+offset_left = 13.0
+offset_top = 180.0
+offset_right = 293.0
+offset_bottom = 572.0
+theme = ExtResource("1_5udjv")
+
 [node name="P_HPLabel" type="RichTextLabel" parent="InteractionHandler" unique_id=2115257457]
 offset_left = 718.0
 offset_top = 204.0
@@ -77,5 +86,12 @@ offset_top = 175.0
 offset_right = 838.0
 offset_bottom = 201.0
 text = "Enemy Health:"
+
+[node name="StatLabel" type="RichTextLabel" parent="InteractionHandler" unique_id=993692174]
+offset_left = 17.0
+offset_top = 154.0
+offset_right = 177.0
+offset_bottom = 177.0
+text = "Current Stats:"
 
 [connection signal="item_clicked" from="InteractionHandler/PlayerActions" to="InteractionHandler" method="OnItemClicked"]

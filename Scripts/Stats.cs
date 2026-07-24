@@ -7,20 +7,28 @@ using System;
 ///</summary>
 public partial class Stats : Node
 {
-    public int pHealth = 100;
-
-    public int eHealth = 100;
+    public Unit player = new Unit("Kami", 69420,
+        50000,
+        500, 
+        3,
+        200,
+        10,
+        200,
+        20000,
+        20,
+        true);
+    
+    public Unit enemy = new Unit("FREAK", 67,
+        50000,
+        500, 
+        3,
+        200,
+        10,
+        200,
+        20000,
+        20,
+        false);
 
     public int turn = 0;
-    
     public Battle battle = new();
-    // Called when the node enters the scene tree for the first time.
-    public override void _Ready()
-    {
-    }
-
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(double delta)
-    {
-    }
 }

@@ -15,9 +15,11 @@ public partial class UIHandler : Node
     private RichTextLabel _playerHealth;
     private RichTextLabel _logDisplay;
     private RichTextLabel _turnIndicator;
+    private RichTextLabel _statBlock;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        _statBlock = GetNode<RichTextLabel>("StatBlock");
         _enemyHealth = GetNode<RichTextLabel>("HealthEnemy");
         _playerHealth = GetNode<RichTextLabel>("HealthPlayer");
         _logDisplay = GetNode<RichTextLabel>("LogDisplay");
@@ -30,8 +32,9 @@ public partial class UIHandler : Node
     /// </summary>
     public void Update()
     {
-        _playerHealth.Text = stats.pHealth.ToString();
-        _enemyHealth.Text = stats.eHealth.ToString();
+        _playerHealth.Text = stats.player.currentHealth.ToString();
+        _enemyHealth.Text = stats.enemy.currentHealth.ToString();
+        _statBlock.Text = stats.battle.currentTurn ? stats.player.ToString() : stats.enemy.ToString();
         _turnIndicator.Text = stats.battle.currentTurn ? "Player Turn" : "Enemy Turn";
         _logDisplay.Text = _log.ToString();
     }
