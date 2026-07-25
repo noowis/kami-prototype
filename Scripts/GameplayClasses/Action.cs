@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using kamiprototype.Scripts.GameplayClasses;
 
 /// <summary>
 /// Defines the standard action a unit can take on their turn
@@ -10,8 +11,7 @@ public abstract class Action
     
     public int mpCost;
     public int hpCost;
-    // For when sequences are added:
-    // public Sequence HitSequence;
+    public Sequence HitSequence;
     public int StockCost;
     
 
