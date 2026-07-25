@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bona378dtn3ex"]
+
+[ext_resource type="Script" uid="uid://ce4e3xa8qebb5" path="res://Scripts/Note.cs" id="1_upmps"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_2017g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2017g"]
+size = Vector2(0.96552753, 1.0062895)
+
+[node name="Note" type="Area2D" unique_id=656576402]
+scale = Vector2(7.2499065, 39.75001)
+script = ExtResource("1_upmps")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1749506841]
+scale = Vector2(0.99999994, 1)
+texture = SubResource("PlaceholderTexture2D_2017g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=440581829]
+position = Vector2(0.017242432, -0.0031437874)
+scale = Vector2(0.9999997, 1)
+shape = SubResource("RectangleShape2D_2017g")
+
+[connection signal="area_entered" from="." to="." method="OnHitZoneEntered"]

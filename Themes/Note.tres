@@ -1,0 +1,49 @@
+[gd_resource type="Theme" format=3 uid="uid://c386djr6b2ob5"]
+
+[sub_resource type="DPITexture" id="DPITexture_48e0l"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#fff\" stroke=\"#000003\" d=\"m.5.5v10l10-10z\"/></svg>
+"
+
+[sub_resource type="DPITexture" id="DPITexture_jkdrk"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"gray\" d=\"M0 0v8h8V0zm8 8v8h8V8z\"/><path fill=\"#fff\" d=\"M8 0v8h8V0zm0 8H0v8h8z\"/></svg>
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kupjx"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+corner_detail = 2
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7clfp"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[resource]
+ColorPresetButton/icons/overbright_indicator = SubResource("DPITexture_48e0l")
+ColorPresetButton/icons/preset_bg = SubResource("DPITexture_jkdrk")
+ColorPresetButton/styles/preset_fg = SubResource("StyleBoxFlat_kupjx")
+ColorPresetButton/styles/preset_focus = SubResource("StyleBoxFlat_7clfp")

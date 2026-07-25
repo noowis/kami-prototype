@@ -5,10 +5,10 @@ namespace kamiprototype.Scripts.GameplayClasses;
 
 public class Sequence
 {
-    private List<float> _timing;
-    private List<char> _sequence;
+    public List<double> _timing;
+    public List<char> _sequence;
 
-    public Sequence(List<float> timing, List<char> sequence)
+    public Sequence(List<double> timing, List<char> sequence)
     {
         if(timing.Count != sequence.Count)
             throw new InvalidOperationException("Timing and sequence lengths do not match");

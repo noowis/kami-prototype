@@ -5,6 +5,15 @@
 [ext_resource type="Script" uid="uid://bv3fn5xmkplw7" path="res://Scripts/Handlers/UIHandler.cs" id="2_oa4a4"]
 [ext_resource type="Theme" uid="uid://coywof8b7yfp5" path="res://Themes/HPdisplay.tres" id="4_ea04b"]
 [ext_resource type="Script" uid="uid://6jgg2gj5p4fv" path="res://Scripts/Stats.cs" id="5_711bq"]
+[ext_resource type="Script" uid="uid://dal2gqychhj7i" path="res://Scripts/Handlers/HighwayHandler.cs" id="6_oa4a4"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_2017g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_unj32"]
+size = Vector2(1.0062913, 1.0014905)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x2a0h"]
+size = Vector2(8, 40)
 
 [node name="Control" type="Control" unique_id=555840305]
 layout_mode = 3
@@ -73,43 +82,96 @@ offset_right = 293.0
 offset_bottom = 572.0
 theme = ExtResource("1_5udjv")
 
-[node name="P_HPLabel" type="RichTextLabel" parent="InteractionHandler" unique_id=2115257457]
+[node name="Static UI" type="Node" parent="InteractionHandler" unique_id=1663802449]
+
+[node name="P_HPLabel" type="RichTextLabel" parent="InteractionHandler/Static UI" unique_id=2115257457]
 offset_left = 718.0
 offset_top = 204.0
 offset_right = 839.0
 offset_bottom = 229.0
 text = "Player Health:"
 
-[node name="E_HPLabel" type="RichTextLabel" parent="InteractionHandler" unique_id=989491737]
+[node name="E_HPLabel" type="RichTextLabel" parent="InteractionHandler/Static UI" unique_id=989491737]
 offset_left = 717.0
 offset_top = 175.0
 offset_right = 838.0
 offset_bottom = 201.0
 text = "Enemy Health:"
 
-[node name="StatLabel" type="RichTextLabel" parent="InteractionHandler" unique_id=993692174]
+[node name="StatLabel" type="RichTextLabel" parent="InteractionHandler/Static UI" unique_id=993692174]
 offset_left = 17.0
 offset_top = 154.0
 offset_right = 177.0
 offset_bottom = 177.0
 text = "Current Stats:"
 
-[node name="HitZone" type="Panel" parent="InteractionHandler" unique_id=1570610242]
-offset_left = 1063.0
-offset_top = 235.0
-offset_right = 1123.0
-offset_bottom = 319.0
-
-[node name="Lane2" type="Panel" parent="InteractionHandler" unique_id=2024142050]
+[node name="Lane2" type="Panel" parent="InteractionHandler/Static UI" unique_id=2024142050]
 offset_left = 817.0
 offset_top = 279.0
 offset_right = 1123.0
 offset_bottom = 319.0
 
-[node name="Lane1" type="Panel" parent="InteractionHandler" unique_id=1477907199]
+[node name="Lane2Start" type="Panel" parent="InteractionHandler/Static UI" unique_id=279941577]
+offset_left = 817.0
+offset_top = 279.0
+offset_right = 824.0
+offset_bottom = 319.0
+
+[node name="Lane1" type="Panel" parent="InteractionHandler/Static UI" unique_id=1477907199]
 offset_left = 817.0
 offset_top = 235.0
 offset_right = 1123.0
 offset_bottom = 275.0
+
+[node name="Lane1Start" type="Panel" parent="InteractionHandler/Static UI" unique_id=1992137564]
+offset_left = 817.0
+offset_top = 235.0
+offset_right = 824.0
+offset_bottom = 275.0
+
+[node name="Label" type="Label" parent="InteractionHandler/Static UI" unique_id=1695442027]
+offset_left = 792.0
+offset_top = 238.0
+offset_right = 947.0
+offset_bottom = 333.0
+text = "A:
+
+B:"
+
+[node name="Highway" type="Node" parent="InteractionHandler" unique_id=1602409041]
+script = ExtResource("6_oa4a4")
+
+[node name="Timer" type="Timer" parent="InteractionHandler/Highway" unique_id=726403547]
+
+[node name="HitZone" type="Area2D" parent="InteractionHandler/Highway" unique_id=1955599032]
+position = Vector2(1093.1876, 277.0625)
+scale = Vector2(59.624886, 83.87499)
+
+[node name="Sprite2D" type="Sprite2D" parent="InteractionHandler/Highway/HitZone" unique_id=1432162991]
+texture = SubResource("PlaceholderTexture2D_2017g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionHandler/Highway/HitZone" unique_id=1139142527]
+position = Vector2(-0.0031471252, -0.00074505806)
+shape = SubResource("RectangleShape2D_unj32")
+
+[node name="MissZone" type="Area2D" parent="InteractionHandler/Highway" unique_id=799412340]
+position = Vector2(1154, 277)
+scale = Vector2(59.624886, 83.87499)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionHandler/Highway/MissZone" unique_id=2046919828]
+position = Vector2(-4.172325e-07, 9.848736e-08)
+shape = SubResource("RectangleShape2D_unj32")
+
+[node name="SpawnA" type="Area2D" parent="InteractionHandler/Highway" unique_id=219704384]
+position = Vector2(821, 255)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionHandler/Highway/SpawnA" unique_id=2063443756]
+shape = SubResource("RectangleShape2D_x2a0h")
+
+[node name="SpawnB" type="Area2D" parent="InteractionHandler/Highway" unique_id=1620961925]
+position = Vector2(821, 299)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionHandler/Highway/SpawnB" unique_id=1788158792]
+shape = SubResource("RectangleShape2D_x2a0h")
 
 [connection signal="item_clicked" from="InteractionHandler/PlayerActions" to="InteractionHandler" method="OnItemClicked"]

@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bn5vxclri7v88"]
+
+[ext_resource type="PackedScene" uid="uid://p6iirgl0tehy" path="res://Scenes/BattlePrototype.tscn" id="1_ko2s7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_2017g"]
+
+[node name="Test" type="Node3D" unique_id=505649542]
+
+[node name="Control" parent="." unique_id=555840305 instance=ExtResource("1_ko2s7")]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1117951394]
+transform = Transform3D(0.82062393, 0, -0.5714686, 0, 1, 0, 0.5714686, 0, 0.82062393, -0.66599417, 0.9074397, 1.2298094)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2066116913]
+mesh = SubResource("BoxMesh_2017g")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=423389771]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -1)
