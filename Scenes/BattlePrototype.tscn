@@ -94,4 +94,22 @@ offset_right = 177.0
 offset_bottom = 177.0
 text = "Current Stats:"
 
+[node name="HitZone" type="Panel" parent="InteractionHandler" unique_id=1570610242]
+offset_left = 1063.0
+offset_top = 235.0
+offset_right = 1123.0
+offset_bottom = 319.0
+
+[node name="Lane2" type="Panel" parent="InteractionHandler" unique_id=2024142050]
+offset_left = 817.0
+offset_top = 279.0
+offset_right = 1123.0
+offset_bottom = 319.0
+
+[node name="Lane1" type="Panel" parent="InteractionHandler" unique_id=1477907199]
+offset_left = 817.0
+offset_top = 235.0
+offset_right = 1123.0
+offset_bottom = 275.0
+
 [connection signal="item_clicked" from="InteractionHandler/PlayerActions" to="InteractionHandler" method="OnItemClicked"]
