@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using kamiprototype.Scripts.Handlers;
 using static Battle;
 
 ///<summary>
@@ -10,13 +11,15 @@ public partial class InteractionHandler : Node
 {
     Stats stats = new Stats();
     UIHandler ui = new UIHandler(); // ui is used to update hud elements.
+    HighwayHandler highway = new HighwayHandler();
+    private BasicAttack _basicAttack = new BasicAttack();
     
-
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         ui = GetNode<UIHandler>("UIHandler");
         stats = GetNode<Stats>("UIHandler/Stats");
+        highway = GetNode<HighwayHandler>("Highway");
     }
 
     ///<summary>
@@ -47,6 +50,10 @@ public partial class InteractionHandler : Node
             }
             ui.AddLogEntry((stats.battle.currentTurn ? "Player" : "Enemy") + " took " + totalDamage + " damage on turn " + stats.turn.ToString());
             ui.Update();
+        }
+        if (index == 2) // Tech
+        {
+            _basicAttack.ExecuteAction(highway);
         }
     }
 }

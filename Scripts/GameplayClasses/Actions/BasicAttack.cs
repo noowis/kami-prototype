@@ -1,12 +1,15 @@
 using Godot;
 using System;
 using kamiprototype.Scripts.GameplayClasses;
+using kamiprototype.Scripts.Handlers;
 
 public class BasicAttack : Action
 {
-    private Sequence HitSequence = new Sequence([1, 1.5d, 2], ['a', 'b', 'a']);
-    public override int ExecuteAction()
+    private Sequence HitSequence = new Sequence([0.5, 0.75, 0.4], ['b', 'a', 'a']);
+    public override int ExecuteAction(HighwayHandler highway)
     {
-        throw new NotImplementedException();
+        highway.LoadSequence(HitSequence);
+        highway.Start();
+        return 0;
     }
 }

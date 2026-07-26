@@ -6,14 +6,16 @@ using System;
 /// </summary>
 public partial class Note : Area2D
 {
-	private float _speed = 100.0f;
+	private float _speed = 200.0f;
 	private bool _inZone = false;
+	public char Button = ' ';
 	
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		MoveLocalX(_speed * (float) delta, false );
-		if (_inZone & Input.IsActionPressed("NoteHitA"))
+		if (_inZone & (Button == 'a' && Input.IsActionPressed("NoteHitA")) 
+		    || (Button == 'b' && Input.IsActionPressed("NoteHitB")))
 		{
 			GD.Print("NoteHitA");
 			QueueFree();

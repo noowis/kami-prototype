@@ -1,13 +1,14 @@
 using Godot;
 using System;
 using kamiprototype.Scripts.GameplayClasses;
+using kamiprototype.Scripts.Handlers;
 
 /// <summary>
 /// Defines the standard action a unit can take on their turn
 /// </summary>
 public abstract class Action
 {
-    public abstract int ExecuteAction();
+    public abstract int ExecuteAction(HighwayHandler highway);
     
     public int mpCost;
     public int hpCost;
