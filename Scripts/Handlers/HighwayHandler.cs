@@ -5,31 +5,76 @@ using kamiprototype.Scripts.GameplayClasses;
 namespace kamiprototype.Scripts.Handlers;
 
 /// <summary>
-/// Highway handler spawns notes and loads sequences of notes to play. Planned to also handle notes being hit properly
+/// Highway handler spawns notes and loads sequences of notes to play. Planned to also handle notes being hit properly.
+/// Sequences can be strung together by using stocks. The highway handler splits these into seperate sequences within
+/// the <code>_sequenceQueue</code>.
 /// </summary>
 // TODO: Move note hitting to HighwayHandler through signal instead of Note?
 public partial class HighwayHandler : Node
 {
+	/// <summary>
+	/// Queue for sequences stocked up by player
+	/// </summary>
+	private Queue<Sequence> _sequenceQueue = new Queue<Sequence>(); 
 	
-	private Queue<Sequence> _sequenceQueue = new Queue<Sequence>();
+	/// <summary>
+	///		Whether or not the sequence is currently being played
+	/// </summary>
 	public bool InPlay = false;
 	private Timer _timer = null;
+	
+	/// <summary>
+	/// Position within current sequence
+	/// </summary>
 	private int _seqPos = 0;
 	private char _button = ' ';
 	private Sequence _currSeq = null;
 	private PackedScene _noteScene = null;
+	
+	/// <summary>
+	/// Note about to be spawned
+	/// </summary>
 	private Note _currNote = null;
+	
+	/// <summary>
+	/// Spawn point for note A
+	/// </summary>
 	private Vector2 _spawnA;
+	/// <summary>
+	/// Spawn point for note B
+	/// </summary>
 	private Vector2 _spawnB;
 	
+	/// <summary>
+	/// Loads assets.
+	/// </summary>
+	public override void _Ready()
+	{
+		GD.Print("Ready");
+		_timer = GetNode<Timer>("Timer");
+		GD.Print("Loaded");
+		_timer.Timeout += OnTimerTimeout;
+		_noteScene = GD.Load<PackedScene>("res://Spawnables/note.tscn");
+		_spawnA = GetNode<Area2D>("SpawnA").Position;
+		_spawnB = GetNode<Area2D>("SpawnB").Position;
+	}
+	
+	/// <summary>
+	/// Loads up a sequence from an action class
+	/// </summary>
+	/// <param name="sequence">Sequence that will be added to the queue of seqeunces</param>
 	public void LoadSequence(Sequence sequence)
 	{
 		_sequenceQueue.Enqueue(sequence);
 	}
 
+	/// <summary>
+	/// When the attack string is initiated Start() should be run. Resets _seqPos, and _button.
+	/// Also starts timer, sets _currSequence and sets InPlay to true. First note will be played when timer is
+	/// activated.
+	/// </summary>
 	public void Start()
 	{
-		GD.Print("1");
 		InPlay = true;
 		_seqPos = 0;
 		_button = ' ';
@@ -37,7 +82,30 @@ public partial class HighwayHandler : Node
 		_timer.Start(_currSeq._timing[_seqPos]);
 
 	}
-
+	
+	/// <summary>
+	/// When timer is activated it will signal this function. Which checks if _seqPos is at the end of the current
+	/// sequence. as well as progressing the sequence position.
+	/// </summary>
+	private void OnTimerTimeout()
+	{
+		
+		_timer.Stop();
+		GD.Print("Timer Ping");
+		
+		if (_seqPos >= _currSeq._timing.Count)
+		{
+			StartNextSequence();
+		}
+		if(InPlay)
+			SendNote();
+		
+		_seqPos++;
+	}
+	
+	/// <summary>
+	/// Sends a note to the correct position on the highway and starts the next timer
+	/// </summary>
 	private void SendNote()
 	{
 		_currNote = (Note) _noteScene.Instantiate();
@@ -55,51 +123,26 @@ public partial class HighwayHandler : Node
 		_timer.Start(_currSeq._timing[_seqPos]);
 	}
 
-	private void OnTimerTimeout()
-	{
-		
-		_timer.Stop();
-		GD.Print("Timer Ping");
-		
-		if (_seqPos >= _currSeq._timing.Count)
-		{
-			StartNextSequence();
-		}
-		if(InPlay)
-			SendNote();
-		
-		_seqPos++;
-	}
 
+	/// <summary>
+	/// Starts the next sequence and if there are no more it will clear the queue.
+	/// </summary>
 	private void StartNextSequence()
 	{
-		GD.Print("2");
-		GD.Print("seqCount: " + _sequenceQueue.Count);
 		if(_sequenceQueue.Count > 1)
 		{
-			GD.Print("3");
 			_currSeq = _sequenceQueue.Dequeue();
-			_sequenceQueue.Clear();
 		}
 		else
 		{
 			InPlay = false;
 			_timer.Stop();
+			_sequenceQueue.Clear();
 		}
 	}
 
 	
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-		GD.Print("Ready");
-		_timer = GetNode<Timer>("Timer");
-		GD.Print("Loaded");
-		_timer.Timeout += OnTimerTimeout;
-		_noteScene = GD.Load<PackedScene>("res://Spawnables/note.tscn");
-		_spawnA = GetNode<Area2D>("SpawnA").Position;
-		_spawnB = GetNode<Area2D>("SpawnB").Position;
-	}
+
 	
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
