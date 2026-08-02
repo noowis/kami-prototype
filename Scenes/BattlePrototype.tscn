@@ -12,6 +12,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_unj32"]
 size = Vector2(1.0062913, 1.0014905)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2017g"]
+size = Vector2(57, 84)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x2a0h"]
 size = Vector2(8, 40)
 
@@ -154,11 +157,17 @@ texture = SubResource("PlaceholderTexture2D_2017g")
 position = Vector2(-0.0031471252, -0.00074505806)
 shape = SubResource("RectangleShape2D_unj32")
 
-[node name="MissZone" type="Area2D" parent="InteractionHandler/Highway" unique_id=799412340]
-position = Vector2(1154, 277)
-scale = Vector2(59.624886, 83.87499)
+[node name="EarlyZone" type="Area2D" parent="InteractionHandler/Highway/HitZone" unique_id=779736041]
+position = Vector2(-0.99266624, -0.00074505806)
+scale = Vector2(0.016771521, 0.011922505)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionHandler/Highway/MissZone" unique_id=2046919828]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionHandler/Highway/HitZone/EarlyZone" unique_id=161025118]
+shape = SubResource("RectangleShape2D_2017g")
+
+[node name="MissZone" type="Area2D" parent="InteractionHandler/Highway/HitZone" unique_id=799412340]
+position = Vector2(1.0199165, -0.00074505806)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionHandler/Highway/HitZone/MissZone" unique_id=2046919828]
 position = Vector2(-4.172325e-07, 9.848736e-08)
 shape = SubResource("RectangleShape2D_unj32")
 
