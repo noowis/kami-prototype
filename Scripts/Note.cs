@@ -22,7 +22,7 @@ public partial class Note : Area2D
 		}
 	}
 	
-	// TODO: SETUP a signal so that it sends it to HighwayHandler when note is pressed.
+	// TODO: Remove this when finished with hitzone
 	
 	
 	/* TODO: Might wanna change this so that it gives a little leeway?

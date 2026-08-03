@@ -27,7 +27,6 @@ public partial class InteractionHandler : Node
     ///</summary>
     private void OnItemClicked(int index, Vector2 at_position, int mouse_button)
     {
-        GD.Print(("bwuh???"));
         if(index == 0)	// End Turn
         {
             ui.AddLogEntry("Turn ended!");

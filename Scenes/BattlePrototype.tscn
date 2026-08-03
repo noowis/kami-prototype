@@ -6,6 +6,7 @@
 [ext_resource type="Theme" uid="uid://coywof8b7yfp5" path="res://Themes/HPdisplay.tres" id="4_ea04b"]
 [ext_resource type="Script" uid="uid://6jgg2gj5p4fv" path="res://Scripts/Stats.cs" id="5_711bq"]
 [ext_resource type="Script" uid="uid://dal2gqychhj7i" path="res://Scripts/Handlers/HighwayHandler.cs" id="6_oa4a4"]
+[ext_resource type="Script" uid="uid://dcjt71tokxb4w" path="res://Scenes/HitZone.cs" id="7_ea04b"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_2017g"]
 
@@ -149,6 +150,7 @@ script = ExtResource("6_oa4a4")
 [node name="HitZone" type="Area2D" parent="InteractionHandler/Highway" unique_id=1955599032]
 position = Vector2(1093.1876, 277.0625)
 scale = Vector2(59.624886, 83.87499)
+script = ExtResource("7_ea04b")
 
 [node name="Sprite2D" type="Sprite2D" parent="InteractionHandler/Highway/HitZone" unique_id=1432162991]
 texture = SubResource("PlaceholderTexture2D_2017g")
@@ -183,4 +185,9 @@ position = Vector2(821, 299)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionHandler/Highway/SpawnB" unique_id=1788158792]
 shape = SubResource("RectangleShape2D_x2a0h")
 
+[node name="StatBlocks" type="Node" parent="." unique_id=2021804263]
+
 [connection signal="item_clicked" from="InteractionHandler/PlayerActions" to="InteractionHandler" method="OnItemClicked"]
+[connection signal="area_entered" from="InteractionHandler/Highway/HitZone" to="InteractionHandler" method="OnHitZoneEntered"]
+[connection signal="area_entered" from="InteractionHandler/Highway/HitZone/EarlyZone" to="InteractionHandler/Highway/HitZone" method="OnEarlyZoneEntered"]
+[connection signal="area_entered" from="InteractionHandler/Highway/HitZone/MissZone" to="InteractionHandler/Highway/HitZone" method="OnMissZoneEntered"]

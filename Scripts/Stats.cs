@@ -5,6 +5,9 @@ using System;
 /// Stats holds the stats of both player and enemy
 /// Mostly uused for testing purposes
 ///</summary>
+/* TODO: Add two dictionaries here, "PlayableStats" and "EnemyStats". Have it searchable by ID (maybe make ID's strings]
+    for easier searching) 
+    Also make a new Node for UnitsInPlay*/
 public partial class Stats : Node
 {
     public Unit player = new Unit("Kami", 69420,
@@ -29,6 +32,7 @@ public partial class Stats : Node
         20,
         false);
 
+    //TODO: Move these somewhere else
     public int turn = 0;
     public Battle battle = new();
 }

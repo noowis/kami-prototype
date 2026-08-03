@@ -10,13 +10,15 @@ namespace kamiprototype.Scripts.Handlers;
 /// the <code>_sequenceQueue</code>.
 /// </summary>
 // TODO: Move note hitting to HighwayHandler through signal instead of Note?
+
 public partial class HighwayHandler : Node
 {
 	/// <summary>
 	/// Queue for sequences stocked up by player
 	/// </summary>
 	private Queue<Sequence> _sequenceQueue = new Queue<Sequence>(); 
-	
+
+	private HitZone _hitZone;
 	/// <summary>
 	///		Whether or not the sequence is currently being played
 	/// </summary>
@@ -50,13 +52,13 @@ public partial class HighwayHandler : Node
 	/// </summary>
 	public override void _Ready()
 	{
-		GD.Print("Ready");
 		_timer = GetNode<Timer>("Timer");
-		GD.Print("Loaded");
 		_timer.Timeout += OnTimerTimeout;
 		_noteScene = GD.Load<PackedScene>("res://Spawnables/note.tscn");
 		_spawnA = GetNode<Area2D>("SpawnA").Position;
 		_spawnB = GetNode<Area2D>("SpawnB").Position;
+		_hitZone = GetChild<HitZone>(1);
+		GD.Print(_hitZone.Name);
 	}
 	
 	/// <summary>
@@ -109,6 +111,7 @@ public partial class HighwayHandler : Node
 	private void SendNote()
 	{
 		_currNote = (Note) _noteScene.Instantiate();
+		_hitZone.Enqueue(_currNote);
 		if (_currSeq.Button[_seqPos] == 'a')
 		{
 			_currNote.Button = 'a';
@@ -147,8 +150,6 @@ public partial class HighwayHandler : Node
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if(_timer.TimeLeft != 0)
-			GD.Print(_timer.TimeLeft);
 	}
 
 }
